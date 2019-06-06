@@ -6,13 +6,12 @@ Created on Thu Jun  6 14:09:14 2019
 """
 
 def fib(i):
-    if i==1 or i == 2:
+    if i<1:
+        result = -1;
+    elif i==1 or i == 2:
         result = 1
     else:
         result = fib(i-1) + fib(i-2)
-        
-        
     return result
 
-
-print (fib(13))
+print (fib(20))
