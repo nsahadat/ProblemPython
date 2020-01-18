@@ -23,6 +23,6 @@ class Solution:
           
         
 # Test program
-s = "tracecars"
+s = "idonotonodi"
 print(str(Solution().longestPalindrome(s)))
 # racecar
