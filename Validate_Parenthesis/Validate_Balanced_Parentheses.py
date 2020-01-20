@@ -15,33 +15,30 @@ An input string is valid if:
 class Solution:
   def isValid(self, s):
     # Fill this in.
-    if len(s)==0:
-        return True
-    brmap = {}
-    brmap['('] = 0
-    brmap['{'] = 0
-    brmap['['] = 0
+    if s==[]:
+            return True
+    bmap = {}
+    bmap[')'] = '('
+    bmap['}'] = '{'
+    bmap[']'] = '['
+    stack = []
     
+    # check every character O(N)
     for st in s:
-        if (st == '(' or st =='{' or st=='['):
-           brmap[st] += 1
-        else:
-            if(st == ')'):
-                brmap['('] -= 1
-            elif (st == '}'):
-                brmap['{'] -= 1
-            elif (st == ']'):
-                brmap['['] -= 1
-            
-            if any([brmap[b] == -1 for b in brmap]):
+        # if character in bmap
+        if (st in bmap):
+            # if stack nonempty then pop the element and compare with the hashmap
+            if stack:
+                top = stack.pop()
+            else:
+                top = '#'
+            if top != bmap[st]:
                 return False
-#        print (brmap)
-    
-    if any([brmap[b] != 0 for b in brmap]):
-#        print('here')
-        return False
-    else:     
-        return True
+        # if not push in to stack to pop later     
+        else:
+            stack.append(st)
+
+    return stack == []
             
 
 
@@ -71,5 +68,9 @@ s = "({}])()"
 print(Solution().isValid(s))
 
 s = "((((({{{{{)))))[[[[[}}}}}]]]]]"
-# should return True
+# should return False
+print(Solution().isValid(s))
+
+s = "([)]"
+# should return False
 print(Solution().isValid(s))
